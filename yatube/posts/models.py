@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
+NUMBER_OF_LETTERS = 15
 
 
 class Post(models.Model):
@@ -21,9 +22,8 @@ class Post(models.Model):
     )
 
     def __str__(self):
-        number_of_letters = 15
         # выводим текст поста
-        return self.text[:number_of_letters]
+        return self.text[:NUMBER_OF_LETTERS]
 
 
 class Group(models.Model):
@@ -32,5 +32,4 @@ class Group(models.Model):
     description = models.TextField(max_length=1000)
 
     def __str__(self):
-        number_of_letters = 15
-        return self.title[:number_of_letters]
+        return self.title[:NUMBER_OF_LETTERS]
