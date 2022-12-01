@@ -2,14 +2,15 @@ from django.shortcuts import render, get_object_or_404
 
 from .models import Post, Group
 
+QUANTITY_OF_POSTS = 10
+
 
 def index(request):
     # Одна строка вместо тысячи слов на SQL:
     # в переменную posts будет сохранена выборка из 10 объектов модели Post,
     # отсортированных по полю pub_date по убыванию (от больших значений к
     # меньшим)
-    quantity_of_posts = 10
-    posts = Post.objects.order_by('-pub_date')[:quantity_of_posts]
+    posts = Post.objects.order_by('-pub_date')[:QUANTITY_OF_POSTS]
     title = 'Это главная страница проекта Yatube'
     template = 'posts/index.html'
 
@@ -31,7 +32,10 @@ def group_posts(request, slug):
     # Метод .filter позволяет ограничить поиск по критериям.
     # Это аналог добавления
     # условия WHERE group_id = {group_id}
-    posts = Post.objects.filter(group=group).order_by('-pub_date')[:10]
+    posts = (
+        Post.objects.filter(group=group)
+        .order_by('-pub_date')[:QUANTITY_OF_POSTS]
+    )
     context = {
         'group': group,
         'posts': posts,

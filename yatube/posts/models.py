@@ -21,8 +21,9 @@ class Post(models.Model):
     )
 
     def __str__(self):
+        number_of_letters = 15
         # выводим текст поста
-        return self.text[:15]
+        return self.text[:number_of_letters]
 
 
 class Group(models.Model):
@@ -31,4 +32,5 @@ class Group(models.Model):
     description = models.TextField(max_length=1000)
 
     def __str__(self):
-        return self.title[:15]
+        number_of_letters = 15
+        return self.title[:number_of_letters]

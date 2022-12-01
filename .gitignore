@@ -144,4 +144,5 @@ dmypy.json
 .history/
 
 .mypy_cache
-.static/
+.static
+.core
