@@ -1,12 +1,29 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 from .models import Post, Group
+
+from functools import wraps
 
 QUANTITY_OF_POSTS = 10
 
 
+def authorized_only(func):
+    # Задекорировали обёртку
+    @wraps(func)
+    # Функция-обёртка в декораторе
+    def check_user(request, *args, **kwargs):
+        # В любую view-функцию первым аргументом передаётся объект request,
+        # в котором есть булева переменная is_authenticated,
+        # определяющая, авторизован ли пользователь.
+        if request.user.is_authenticated:
+            # Возвращает view-функцию, если пользователь авторизован.
+            return func(request, *args, **kwargs)
+        # Если пользователь не авторизован — отправим его на страницу логина.
+        return redirect('/auth/login/')
+    return check_user
+
+
 def index(request):
-    # Одна строка вместо тысячи слов на SQL:
     # в переменную posts будет сохранена выборка из 10 объектов модели Post,
     # отсортированных по полю pub_date по убыванию (от больших значений к
     # меньшим)
