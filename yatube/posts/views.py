@@ -1,13 +1,13 @@
 from django.shortcuts import render, get_object_or_404
-
-from django.contrib.auth.decorators import login_required
+# закоммитил, чтобы пройти тесты 3-го спринта
+# from django.contrib.auth.decorators import login_required
 
 from .models import Post, Group
 
 QUANTITY_OF_POSTS = 10
 
 
-#@login_required
+# @login_required - это тоже.
 def index(request):
     # в переменную posts будет сохранена выборка из 10 объектов модели Post,
     # отсортированных по полю pub_date по убыванию (от больших значений к
