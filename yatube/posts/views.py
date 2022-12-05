@@ -7,7 +7,7 @@ from .models import Post, Group
 QUANTITY_OF_POSTS = 10
 
 
-@login_required
+#@login_required
 def index(request):
     # в переменную posts будет сохранена выборка из 10 объектов модели Post,
     # отсортированных по полю pub_date по убыванию (от больших значений к
