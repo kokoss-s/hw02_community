@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
     
     {% block title %}
-        Последние обновления
+        {{ title }}
     {% endblock title %}
 
   <body>
@@ -9,11 +9,11 @@
     <div class="container py-5">     
       <h1>{{ title }}</h1>
         {% block content %}
-          {% for post in posts %}
+          {% for post in page_obj %}
             <article>
               <ul>
                 <li>
-                  Автор: {{ post.autor.get_full_name }}
+                  Автор: {{ post.author.get_full_name }}
                 </li>
                 <li>
                   Дата публикации: {{ post.pub_date|date:"d E Y" }}
@@ -28,5 +28,6 @@
              <hr>
              {% endif %}
           {% endfor %}
+          {% include 'includes/paginator.html' %}
         {% endblock %}
   </body>

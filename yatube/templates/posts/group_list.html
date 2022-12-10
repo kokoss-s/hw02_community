@@ -9,7 +9,7 @@
       <div class="container py-5">
         <h1> Записи группы: {{ group.title }}</h1>
         <p>{{ group.description|linebreaks }}</p>
-        {% for post in posts %}
+        {% for post in page_obj %}
           <article>
             <ul>
               <li>
@@ -27,6 +27,7 @@
             {% endif %}        
           </article>
         {% endfor %}
+        {% include 'includes/paginator.html' %}
       </div>
   {% endblock content %}
   
